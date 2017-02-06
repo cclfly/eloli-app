@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
     <script type="text/javascript">
+    	loadTimeout = null;
    		document.addEventListener('plusready', function(){
    			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
    			var ws = plus.webview.open('http://eloli.moe/','eloli');
@@ -41,7 +42,6 @@
 					ws.back();
 				}
 			});
-			var loadTimeout = null;
 			ws.addEventListener("loading",function(){
    				ws.setStyle({mask:'rgba(0,0,0,0.3)'});
 				plus.nativeUI.showWaiting("loading...",{back:"transmit",background:"rgba(0,0,0,0.3)"});
@@ -50,8 +50,8 @@
 					ws.endPullToRefresh();
 	   				ws.setStyle({mask:'none'});
 					plus.nativeUI.closeWaiting();
-					plus.nativeUI.toast("加载失败！请检查网络或稍后再试");
-				},10000);
+					plus.nativeUI.toast("加载超时！请检查网络或稍后再试");
+				},60000);
 			});
 			ws.addEventListener("loaded",function(){
 				clearTimeout(loadTimeout);
