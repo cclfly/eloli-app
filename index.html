@@ -6,10 +6,11 @@
     <title></title>
     <script type="text/javascript">
     	loadTimeout = null;
+    	wChat = null;
    		document.addEventListener('plusready', function(){
    			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
    			var ws = plus.webview.open('http://eloli.moe/','eloli');
-   			ws.setJsFile('js/a.js');
+// 			ws.setJsFile('js/a.js');
    			ws.setPullToRefresh({
    				support:true,
 				height:"50px",
@@ -28,6 +29,11 @@
 			});
 			var time = new Date().getTime();
 			plus.key.addEventListener("backbutton",function(){
+				if(wChat != null){
+					wChat.close();
+					wChat = null;
+					return;
+				}
 				var canBack = true;
 				ws.canBack(function(e){canBack=e.canBack;});
 				if((!canBack)||ws.getURL()=="http://eloli.moe/m/"){
@@ -58,6 +64,40 @@
 				ws.endPullToRefresh();
    				ws.setStyle({mask:'none'});
 				plus.nativeUI.closeWaiting();
+			});
+			
+			ws.overrideUrlLoading({mode:"reject",match:"http://chat.eloli.moe/"},function(e){
+				wChat = plus.webview.open("http://chat.eloli.moe/",'chat');
+				wChat.setStyle({'zindex':10});
+				
+				wChat.setPullToRefresh({
+	   				support:true,
+					height:"50px",
+					range:"200px",
+					contentdown:{
+						caption:"下拉可以打开或关闭软键盘"
+					},
+					contentover:{
+						caption:"释放立即打开或关闭软键盘"
+					},
+					contentrefresh:{
+						caption:"..."
+					}
+				},function(){
+					var Context = plus.android.importClass("android.content.Context");
+				    var InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+				    var main = plus.android.runtimeMainActivity();
+				    var imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+				    imm.toggleSoftInput(0,InputMethodManager.SHOW_FORCED);
+				});
+
+				var Context = plus.android.importClass("android.content.Context");
+			    var InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+			    var main = plus.android.runtimeMainActivity();
+			    var imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+			    imm.toggleSoftInput(0,InputMethodManager.SHOW_FORCED);
+			    
+				wChat.reload(false);
 			});
    		});
    		
