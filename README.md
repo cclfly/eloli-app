@@ -1,4 +1,4 @@
-# Eloli
+# <a href="http://eloli.moe">Eloli</a>
 <pre>
 不再只是单纯的字母
 而是梦想的象征,是希望的象征
