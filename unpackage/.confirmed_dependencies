@@ -1,0 +1,10 @@
+{
+  "index.html": {
+    "resources": [
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "load.html"
+    ]
+  }
+}

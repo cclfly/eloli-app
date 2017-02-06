@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script type="text/javascript">
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+   			var ws = plus.webview.open('http://eloli.moe/','eloli');
+   			ws.setJsFile('js/a.js');
+   			ws.setPullToRefresh({
+   				support:true,
+				height:"50px",
+				range:"200px",
+				contentdown:{
+					caption:"下拉可以刷新"
+				},
+				contentover:{
+					caption:"释放立即刷新"
+				},
+				contentrefresh:{
+					caption:"正在刷新..."
+				}
+			},function(){
+				ws.reload();
+			});
+			var time = new Date().getTime();
+			plus.key.addEventListener("backbutton",function(){
+				var canBack = true;
+				ws.canBack(function(e){canBack=e.canBack;});
+				if((!canBack)||ws.getURL()=="http://eloli.moe/m/"){
+					if(new Date().getTime()-time<800){
+						ws.close();
+						plus.runtime.quit();
+					}else{
+						plus.nativeUI.toast("再按一次退出应用");
+						time = new Date().getTime();
+					}
+				}else{
+					ws.back();
+				}
+			});
+			var loadTimeout = null;
+			ws.addEventListener("loading",function(){
+   				ws.setStyle({mask:'rgba(0,0,0,0.3)'});
+				plus.nativeUI.showWaiting("loading...",{back:"transmit",background:"rgba(0,0,0,0.3)"});
+				//TODO:超时
+				loadTimeout = setTimeout(function(){
+					ws.endPullToRefresh();
+	   				ws.setStyle({mask:'none'});
+					plus.nativeUI.closeWaiting();
+					plus.nativeUI.toast("加载失败！请检查网络或稍后再试");
+				},10000);
+			});
+			ws.addEventListener("loaded",function(){
+				clearTimeout(loadTimeout);
+				ws.endPullToRefresh();
+   				ws.setStyle({mask:'none'});
+				plus.nativeUI.closeWaiting();
+			});
+   		});
+   		
+    </script>
+</head>
+<body>
+	
+</body>
+</html>
