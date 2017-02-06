@@ -3,7 +3,7 @@
     "id": "H5AE4B434",/*应用的标识，创建应用时自动生成，勿手动修改*/
     "name": "eloli的辣鸡APP",/*应用名称，程序桌面图标名称*/
     "version": {
-        "name": "0.0.4",/*应用版本名称*/
+        "name": "0.0.5",/*应用版本名称*/
         "code": ""
     },
     "description": "",/*应用描述信息*/
@@ -18,16 +18,12 @@
     },
     "permissions": {
         
-        "Audio": {
-            "description": "访问麦克风"
-        },
+        
         
         "Cache": {
             "description": "管理应用缓存"
         },
-        "Camera": {
-            "description": "访问摄像头"
-        },
+        
         "Console": {
             "description": "跟踪调试输出日志"
         },
@@ -39,29 +35,15 @@
         "Events": {
             "description": "应用扩展事件"
         },
-        "File": {
-            "description": "访问本地文件系统"
-        },
-        "Gallery": {
-            "description": "访问系统相册"
-        },
-        "Geolocation": {
-            "description": "访问位置信息"
-        },
-        "Invocation": {
-            "description": "使用Native.js能力"
-        },
-        "Orientation": {
-            "description": "访问方向感应器"
-        },
         
-        "Storage": {
-            "description": "管理应用本地数据"
-        },
         
-        "Uploader": {
-            "description": "管理文件上传任务"
-        },
+        
+        
+        
+        
+        
+        
+        
         "Runtime": {
             "description": "访问运行期环境"
         },
@@ -69,26 +51,14 @@
             "description": "跨域网络访问"
         },
         
-        "Barcode": {
-            "description": "管理二维码扫描插件"
-        },
-        "Maps": {
-            "description": "管理地图插件"
-        },
-        "Speech": {
-            "description": "管理语音识别插件"
-        },
+        
+        
+        
         "Webview":{
         	"description": "窗口管理"
         },
         "NativeUI":{
         	"description": "原生UI控件"
-        },
-        "Navigator":{
-        	"description": "浏览器信息"
-        },
-        "NativeObj":{
-        	"description": "原生对象"
         }
     },
     "plus": {
@@ -114,7 +84,7 @@
                 "keystore": "",/*Android应用打包使用的密钥库文件*/
                 "password": "",/*Android应用打包使用密钥库中证书的密码*/
                 "aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-               "permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+               "permissions": []
 				/*使用Native.js调用原生安卓API需要使用到的系统权限*/
             },
             "orientation": [
