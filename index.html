@@ -67,7 +67,11 @@
 			});
 			
 			ws.overrideUrlLoading({mode:"reject",match:"http://chat.eloli.moe/"},function(e){
-				wChat = plus.webview.open("http://chat.eloli.moe/",'chat');
+				var styles = {};
+				if(!plus.webview.defaultHardwareAccelerated()&&parseInt(plus.os.version)>=5){
+					styles.hardwareAccelerated=true;
+				}
+				wChat = plus.webview.open("http://chat.eloli.moe/",'chat',styles);
 				wChat.setStyle({'zindex':10});
 				
 				wChat.setPullToRefresh({
