@@ -5,6 +5,21 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
     <script type="text/javascript">
+    	Array.prototype.contains = function ( needle ) {
+    		for (i in this) {
+    			if (this[i] == needle) 
+    				return true;
+    		}
+    		return false;
+    	}
+    	function isIndex(url) {
+    		var index = new Array();
+    		index.push("https://eloli.moe/m/");
+    		index.push("https://eloli.moe/m/home/");
+    		index.push("https://eloli.moe/");
+    		if(index.contains(url))return true;
+    		else return false;
+    	}
     	loadTimeout = null;
     	wChat = null;
    		document.addEventListener('plusready', function(){
@@ -36,7 +51,7 @@
 				}
 				var canBack = true;
 				ws.canBack(function(e){canBack=e.canBack;});
-				if((!canBack)||ws.getURL()=="http://eloli.moe/m/"){
+				if((!canBack)||isIndex(ws.getURL())){
 					if(new Date().getTime()-time<800){
 						ws.close();
 						plus.runtime.quit();
